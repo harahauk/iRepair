@@ -7,8 +7,8 @@ function GetLowestDurabilityItemAndSlot()
   slots_to_check = {"HeadSlot", "ShoulderSlot", "ChestSlot", "WristSlot",
     "HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "MainHandSlot", "SecondaryHandSlot"}
 
-  for c = 0, getn(slots_to_check) do
-    durmax, durnow = GetInventoryItemDurability(GetInventorySlotInfo(slots_to_check[c]))
+  for c in slots_to_check do
+    durmax, durnow = GetInventoryItemDurability(GetInventorySlotInfo(c))
     if durmax then -- Check if it return a nil value
       -- print(durmax.." now "..durnow)
       percent = (durmax / durnow) * 100
