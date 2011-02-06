@@ -8,7 +8,7 @@ function GetLowestDurabilityItemAndSlot()
   for i, slot in ipairs(slots_to_check) do
     durmax, durnow = GetInventoryItemDurability(GetInventorySlotInfo(slot))
     if durmax then -- Check if it return a nil value, happens if no item
-      print(slot.." "..durmax.." now "..durnow)
+      -- print(slot.." "..durmax.." now "..durnow) -- used for debugging
       percent = (durmax / durnow) * 100
       if (percent < lowest) then
         lowest = percent
@@ -16,7 +16,7 @@ function GetLowestDurabilityItemAndSlot()
       end
     end
   end
-  return lowest, slot
+  return lowest, lowest_slot
 end
 
 function CalculateRepairCost()
@@ -26,17 +26,14 @@ end
 
 function SlashCmdList.IREPAIR()
   lowest, slot = GetLowestDurabilityItemAndSlot()
+     --print(string.format("pi = %.4f", PI))     --> pi = 3.1416
 
   if slot then
-    print("Lowest item has "..lowest.."%")
-    print(slot)
+    print("Lowest item is "..slot.." at "..string.format("%.0f" ,lowest).."% durability.")
   else
-    print "All items are at 100%"
+    print "All items are at 100% durability"
   end
 end
-
-
-
 
 SLASH_IREPAIR1 = '/irepair' -- Assign the slash command to a variable
 SlashCmdList["SLASH_IREPAIR"] = SlashCmdList.IREPAIR -- Add the variable to slash commands
