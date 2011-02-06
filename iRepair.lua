@@ -1,21 +1,18 @@
 function GetLowestDurabilityItemAndSlot()
   lowest = 100
-  slot = -1
+  lowest_slot = -1
   durmax, durnow = 100
-  -- TODO: Use GetInventorySlotInfo(invSlotName) to get the index
-  -- and replace for loop with manual statements to make it upgrade firendly
   slots_to_check = {"HeadSlot", "ShoulderSlot", "ChestSlot", "WristSlot",
-    "HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "MainHandSlot", "SecondaryHandSlot"}
+    "HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "MainHandSlot", "SecondaryHandSlot" }
 
-  for i, c in ipairs(slots_to_check) do
-    slotinfo = GetInventorySlotInfo(c)
-    durmax, durnow = GetInventoryItemDurability(slotinfo)
-    if durmax then -- Check if it return a nil value
-      -- print(durmax.." now "..durnow)
+  for i, slot in ipairs(slots_to_check) do
+    durmax, durnow = GetInventoryItemDurability(GetInventorySlotInfo(slot))
+    if durmax then -- Check if it return a nil value, happens if no item
+      print(durmax.." now "..durnow)
       percent = (durmax / durnow) * 100
       if (percent < lowest) then
         lowest = percent
-        slot = c
+        lowest_slot = slot
       end
     end
   end
