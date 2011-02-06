@@ -7,7 +7,7 @@ function GetLowestDurabilityItemAndSlot()
   for i, slot in ipairs(slots_to_check) do
     durmax, durnow = GetInventoryItemDurability(GetInventorySlotInfo(slot))
     if durmax then -- Check if it return a nil value, happens if no item
-      -- print(slot.." "..durmax.." now "..durnow) -- used for debugging
+      print(slot.." "..durmax.." now "..durnow) -- used for debugging
       percent = (durmax / durnow) * 100
       if (percent < lowest) then
         lowest = percent
