@@ -7,7 +7,7 @@ function GetLowestDurabilityItemAndSlot()
   slots_to_check = {"HeadSlot", "ShoulderSlot", "ChestSlot", "WristSlot",
     "HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "MainHandSlot", "SecondaryHandSlot"}
 
-  for i, c in slots_to_check do
+  for i, c in ipairs(slots_to_check) do
     slotinfo = GetInventorySlotInfo(c)[0]
     durmax, durnow = GetInventoryItemDurability(slotinfo)
     if durmax then -- Check if it return a nil value
