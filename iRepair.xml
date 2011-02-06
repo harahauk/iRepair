@@ -1,0 +1,14 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+    http://wowprogramming.com/FrameXML/UI.xsd">
+
+  <!-- TODO: This is a placeholder file, GUI to be implemented -->
+  <Script file="iRepair.lua"/>
+  <Frame name="IRepairFrame">
+   <Scripts>
+    <OnLoad>
+    </OnLoad>
+   </Scripts>
+  </Frame>
+</Ui>

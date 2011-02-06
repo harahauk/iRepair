@@ -1,0 +1,5 @@
+## Interface: 40000
+## Title: iRepair
+## Notes: My first AddOn
+iRepair.lua
+iRepair.xml
