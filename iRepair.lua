@@ -1,7 +1,6 @@
 function GetLowestDurabilityItemAndSlot()
-  lowest = 100
   lowest_slot = nil
-  durmax, durnow = 100
+  durmax, durnow, lowest, percent = 100
   slots_to_check = {"HeadSlot", "ShoulderSlot", "ChestSlot", "WristSlot",
     "HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "MainHandSlot", "SecondaryHandSlot" }
 
@@ -26,10 +25,9 @@ end
 
 function SlashCmdList.IREPAIR()
   lowest, slot = GetLowestDurabilityItemAndSlot()
-     --print(string.format("pi = %.4f", PI))     --> pi = 3.1416
-
   if slot then
-    print("Lowest item is "..slot.." at "..string.format("%.0f" ,lowest).."% durability.")
+    item_link  = GetInventoryItemLink("Player", GetInventorySlotInfo(slot))
+    print("Lowest item is "..item_link.." at "..string.format("%.0f" ,lowest).."% durability.")
   else
     print "All items are at 100% durability"
   end
