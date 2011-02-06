@@ -1,6 +1,6 @@
 function GetLowestDurabilityItemAndSlot()
   lowest = 100
-  lowest_slot = -1
+  lowest_slot = nil
   durmax, durnow = 100
   slots_to_check = {"HeadSlot", "ShoulderSlot", "ChestSlot", "WristSlot",
     "HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "MainHandSlot", "SecondaryHandSlot" }
@@ -27,7 +27,7 @@ end
 function SlashCmdList.IREPAIR()
   lowest, slot = GetLowestDurabilityItemAndSlot()
 
-  if (slot > -1) then
+  if slot then
     print("Lowest item has "..lowest.."%")
     print(slot)
   else
