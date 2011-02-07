@@ -5,9 +5,10 @@
 
   <!-- TODO: This is a placeholder file, GUI to be implemented -->
   <Script file="iRepair.lua"/>
-  <Frame name="IRepairFrame">
+  <Frame name="IRepair">
    <Scripts>
     <OnLoad>
+        InitIRepair();
     </OnLoad>
    </Scripts>
   </Frame>

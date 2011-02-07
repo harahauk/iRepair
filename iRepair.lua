@@ -30,8 +30,38 @@ function SlashCmdList.IREPAIR()
     item_link  = GetInventoryItemLink("Player", GetInventorySlotInfo(slot))
     print("Lowest item is "..item_link.." at "..string.format("%.0f" ,lowest).."% durability.")
   else
-    print "All items are at 100% durability"
+    print "All items are at 100% durability."
   end
+end
+
+function IRepair_OnEvent(self, event) --self, event, ...
+  --SlashCmdList.IREPAIR()
+  print(event)
+  if (event == "LFG_UPDATE") then
+   print("Event happened! You joined the queve")
+  end
+  if (event == "PARTY_INVITE") then
+    print "PARTY Invite happened"
+  end
+  print "function ran atleast"
+end
+
+local function AddEventHandlers()
+  local IRepair = CreateFrame("Frame")
+  --IRepair:RegisterEvent("JoinLFG")
+  IRepair:RegisterEvent("LFG_UPDATE") -- WoRKS
+  --IRepair:RegisterEvent("LFG_ROLE_CHECK_UPDATE")
+  ----IRepair:RegisterEvent("LFG_ROLE_UPDATE")
+  IRepair:RegisterEvent("LFG_UPDATE_RANDOM_INFO")
+  IRepair:RegisterEvent("PARTY_INVITE")
+  IRepair:SetScript("OnEvent", IRepair_OnEvent)
+  --print("Listeners set.")
+end
+
+function InitIRepair()
+  print "iRepair succesfully loaded, use /irepair to manually get a durability report."
+  AddEventHandlers()
+  SlashCmdList.IREPAIR()
 end
 
 SLASH_IREPAIR1 = '/irepair' -- Assign the slash command to a variable
