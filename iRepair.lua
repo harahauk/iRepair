@@ -19,10 +19,10 @@ function GetLowestDurabilityItemAndSlot()
   return lowest, lowest_slot
 end
 
-function CalculateRepairCost()
-  print "TO BE IMPLEMETED"
+--function CalculateRepairCost()
+--  print "TO BE IMPLEMETED"
   -- TODO: Implement this placeholder
-end
+--end
 
 function SlashCmdList.IREPAIR()
   lowest, slot = GetLowestDurabilityItemAndSlot()
@@ -34,26 +34,67 @@ function SlashCmdList.IREPAIR()
   end
 end
 
-function IRepair_OnEvent(self, event) --self, event, ...
-  lowest, slot = GetLowestDurabilityItemAndSlot()
-  if lowest < TRESHOLD then
-    SlashCmdList.IREPAIR()
-  end
+function CreateOptionsFrame()
+  irepair = CreateFrame("Frame", "IRepairConfig", InterfaceOptionsFramePanelContainer)
+  irepair:Hide()
+  irepair.name = "iRepair"
+  InterfaceOptions_AddCategory(irepair)
+
+  irepair:SetScript("OnShow", function()
+
+    end)
+	local title = irepair:CreateFontString("IRepairConfigTitle", "ARTWORK", "GameFontNormalLarge")
+	title:SetPoint("TOPLEFT", 16, -16)
+	title:SetText("iRepair")
+
+        slider = CreateFrame("Slider", "IRepairConfig", irepair, "OptionsSliderTemplate")
+        slider:SetMinMaxValues(0, 100)                                                                                                                     
+        slider:SetValue(100)--(IREPAIR_TRESHOLD)
+        slider:SetValueStep(1)
+        slider:SetScript("OnValueChanged", function(self) getglobal(self:GetName() .. "Text"):SetText(self:GetValue()); IREPAIR_TRESHOLD = self:GetValue()  end) 
+        getglobal(slider:GetName() .. "Low"):SetText("0")
+        getglobal(slider:GetName() .. "High"):SetText("100")
+        getglobal(slider:GetName() .. "Text"):SetText(0)--(IREPAIR_TRESHOLD)
+        slider:SetPoint("TOPRIGHT", -10, -170)  
 end
+
+
+function IRepair_OnEvent(self, event) --self, event, ...
+    if(event == "ADDON_LOADED") then
+      LoadSavedVariables()
+      VariablesLoaded = True
+    end
+
+    if(event == "LFG_UPDATE" and (GetNumPartyMembers() == 0)) then
+        lowest, slot = GetLowestDurabilityItemAndSlot()
+        if lowest < slider:GetValue() then
+            SlashCmdList.IREPAIR()
+        end
+    end
+
+end
+
+function LoadSavedVariables()
+  getglobal(slider:GetName() .. "Text"):SetText(IREPAIR_TRESHOLD)
+  slider:SetValue(IREPAIR_TRESHOLD)
+end
+
 
 local function AddEventHandlers()
   local IRepair = CreateFrame("Frame")
   IRepair:RegisterEvent("LFG_UPDATE")
+    IRepair:RegisterEvent("ADDON_LOADED")
   IRepair:SetScript("OnEvent", IRepair_OnEvent)
 end
 
 function InitIRepair()
-  print "iRepair succesfully loaded, use /irepair to manually get a durability report."
+  print "Thank you for using iRepair, use /irepair to manually get a durability report."
+  CreateOptionsFrame()
   AddEventHandlers()
   SlashCmdList.IREPAIR()
 end
 
 SLASH_IREPAIR1 = '/irepair' -- Assign the slash command to a variable
-TRESHOLD = 80
+--TRESHOLD = 70
 
 SlashCmdList["SLASH_IREPAIR"] = SlashCmdList.IREPAIR -- Add the variable to slash commands

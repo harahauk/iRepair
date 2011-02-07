@@ -1,5 +1,6 @@
 ## Interface: 40000
 ## Title: iRepair
 ## Notes: Checks and notifies you if you haven't repaired when entering LFG queue or entering a group. Manual check with /irepair returns lowest item and a itemlink. See webpage for more features.
+## SavedVariables: IREPAIR_TRESHOLD, IREPAIR_OPTIONS
 iRepair.lua
 iRepair.xml
