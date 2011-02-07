@@ -35,27 +35,16 @@ function SlashCmdList.IREPAIR()
 end
 
 function IRepair_OnEvent(self, event) --self, event, ...
-  --SlashCmdList.IREPAIR()
-  print(event)
-  if (event == "LFG_UPDATE") then
-   print("Event happened! You joined the queve")
+  lowest, slot = GetLowestDurabilityItemAndSlot()
+  if lowest < TRESHOLD then
+    SlashCmdList.IREPAIR()
   end
-  if (event == "PARTY_INVITE") then
-    print "PARTY Invite happened"
-  end
-  print "function ran atleast"
 end
 
 local function AddEventHandlers()
   local IRepair = CreateFrame("Frame")
-  --IRepair:RegisterEvent("JoinLFG")
-  IRepair:RegisterEvent("LFG_UPDATE") -- WoRKS
-  --IRepair:RegisterEvent("LFG_ROLE_CHECK_UPDATE")
-  ----IRepair:RegisterEvent("LFG_ROLE_UPDATE")
-  IRepair:RegisterEvent("LFG_UPDATE_RANDOM_INFO")
-  IRepair:RegisterEvent("PARTY_INVITE")
+  IRepair:RegisterEvent("LFG_UPDATE")
   IRepair:SetScript("OnEvent", IRepair_OnEvent)
-  --print("Listeners set.")
 end
 
 function InitIRepair()
@@ -65,4 +54,6 @@ function InitIRepair()
 end
 
 SLASH_IREPAIR1 = '/irepair' -- Assign the slash command to a variable
+TRESHOLD = 80
+
 SlashCmdList["SLASH_IREPAIR"] = SlashCmdList.IREPAIR -- Add the variable to slash commands
