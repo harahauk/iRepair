@@ -1,5 +1,5 @@
 ## Interface: 40000
 ## Title: iRepair
-## Notes: My first AddOn
+## Notes: Checks and notifies you if you haven't repaired when entering LFG queue or entering a group. Manual check with /irepair returns lowest item and a itemlink. See webpage for more features.
 iRepair.lua
 iRepair.xml
