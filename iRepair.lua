@@ -46,6 +46,10 @@ function CreateOptionsFrame()
 	local title = irepair:CreateFontString("IRepairConfigTitle", "ARTWORK", "GameFontNormalLarge")
 	title:SetPoint("TOPLEFT", 16, -16)
 	title:SetText("iRepair")
+        
+        local sliderlabel = irepair:CreateFontString("IRepairConfigTitle", "ARTWORK", "GameFontNormal")
+	sliderlabel:SetPoint("LEFT", 15, 70)
+	sliderlabel:SetText("Set the durability treshold for which you want\nconsole spam when entering LFG/group.")
 
         slider = CreateFrame("Slider", "IRepairConfig", irepair, "OptionsSliderTemplate")
         slider:SetMinMaxValues(0, 100)                                                                                                                     
@@ -55,8 +59,7 @@ function CreateOptionsFrame()
         getglobal(slider:GetName() .. "Low"):SetText("0")
         getglobal(slider:GetName() .. "High"):SetText("100")
         getglobal(slider:GetName() .. "Text"):SetText(0)--(IREPAIR_TRESHOLD)
-        slider:SetPoint("TOPRIGHT", -10, -170) 
-        print("test")
+        slider:SetPoint("LEFT", 15, 20) 
 end
 
 
