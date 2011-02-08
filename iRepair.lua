@@ -55,7 +55,8 @@ function CreateOptionsFrame()
         getglobal(slider:GetName() .. "Low"):SetText("0")
         getglobal(slider:GetName() .. "High"):SetText("100")
         getglobal(slider:GetName() .. "Text"):SetText(0)--(IREPAIR_TRESHOLD)
-        slider:SetPoint("TOPRIGHT", -10, -170)  
+        slider:SetPoint("TOPRIGHT", -10, -170) 
+        print("test")
 end
 
 
@@ -75,6 +76,10 @@ function IRepair_OnEvent(self, event) --self, event, ...
 end
 
 function LoadSavedVariables()
+    --Avoid error if you are using the mod for the first time
+    if not IREPAIR_TRESHOLD then
+        IREPAIR_TRESHOLD = 80
+    end
   getglobal(slider:GetName() .. "Text"):SetText(IREPAIR_TRESHOLD)
   slider:SetValue(IREPAIR_TRESHOLD)
 end
